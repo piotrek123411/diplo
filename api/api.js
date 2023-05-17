@@ -1,16 +1,11 @@
-const cors = require('cors');
-
 const app = require('express')();
 
-const Server = require('./services/server');
-
-const publicRoutes = require('../config/routes/publicRoutes');
-const privateRoutes = require('../config/routes/privateRoutes');
-
-app.use(cors());
+app.use(require('cors')());
 app.use(require('express').json());
-app.use('/api/public', publicRoutes);
-app.use('/api/private', privateRoutes);
+app.use('/api/public', require('../config/routes/publicRoutes'));
+app.use('/api/private', require('../config/routes/privateRoutes'));
+app.use(require('./middlewares/errorHandlingMiddleware'));
 
+const Server = require('./services/Server');
 new Server(app).start();
 
