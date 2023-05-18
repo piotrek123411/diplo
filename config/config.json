@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "host": "127.0.0.1",
+        "port": 5432,
+        "database": "postgres",
+        "user": "postgres",
+        "password": "admin",
+        "driver": "pg",
+        "multipleStatements": true,
+        "dialect": "postgres",
+        "ssl": false,
+        "dialectOptions": {
+          "useUTC": false
+        },
+        "timezone": "Europe/Minsk"
+    },
+    "sql-file": true,
+    "timezone": "+03:00"
+}
