@@ -1,9 +1,26 @@
+-- Таблица ролей --
+CREATE TABLE IF NOT EXISTS "roles" (
+    "id"                UUID    PRIMARY KEY DEFAULT gen_random_uuid(),
+    "name"              VARCHAR(150)     NOT NULL,  
+    "createdAt"         TIMESTAMP WITH TIME ZONE    DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt"         TIMESTAMP WITH TIME ZONE    DEFAULT CURRENT_TIMESTAMP
+);
+
+COMMENT ON TABLE "roles" IS 'Таблица ролей';
+COMMENT ON COLUMN "roles"."id" IS 'Идентификатор роли';
+COMMENT ON COLUMN "roles"."name" IS 'Название роли';
+COMMENT ON COLUMN "roles"."createdAt" IS 'Время создания записи';
+COMMENT ON COLUMN "roles"."updatedAt" IS 'Время обновления записи';
+
+INSERT INTO "roles" ("id", "name") VALUES ('user');
+INSERT INTO "roles" ("id", "name") VALUES ('admin');
+
 -- Таблица пользователей --
 CREATE TABLE IF NOT EXISTS "users" (
-    "id"                UUID    PRIMARY KEY     NOT NULL,
+    "id"                UUID    PRIMARY KEY     DEFAULT gen_random_uuid (),
     "login"             VARCHAR(24)     NOT NULL,  
     "password"          VARCHAR(150)     NOT NULL,
-    "role_id"           VARCHAR(30)    DEFAULT '',
+    "role_id"           UUID    REFERENCES "roles"("id"),
     "createdAt"         TIMESTAMP WITH TIME ZONE    DEFAULT CURRENT_TIMESTAMP,
     "updatedAt"         TIMESTAMP WITH TIME ZONE    DEFAULT CURRENT_TIMESTAMP
 );

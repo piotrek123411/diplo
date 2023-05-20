@@ -15,7 +15,9 @@ class AuthController extends require('./BaseController') {
 
     async register(req, res, next) {
         try {
-            res.json('reg page');
+            const pool = req.body;
+            pool.role_id = (await super.getOne('roles', { name: 'user' }, req, res, next, false)).dataValues.id;
+            const user = await super.add('users', pool, req, res, next, true);
         } catch(error) {
             next(ApiErrors.badRequest('Ошибка при регистрации пользователя'));
         }
