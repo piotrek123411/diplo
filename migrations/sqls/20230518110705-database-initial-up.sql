@@ -12,8 +12,8 @@ COMMENT ON COLUMN "roles"."name" IS 'Название роли';
 COMMENT ON COLUMN "roles"."createdAt" IS 'Время создания записи';
 COMMENT ON COLUMN "roles"."updatedAt" IS 'Время обновления записи';
 
-INSERT INTO "roles" ("id", "name") VALUES ('user');
-INSERT INTO "roles" ("id", "name") VALUES ('admin');
+INSERT INTO "roles" ("name") VALUES ('user');
+INSERT INTO "roles" ("name") VALUES ('admin');
 
 -- Таблица пользователей --
 CREATE TABLE IF NOT EXISTS "users" (

@@ -10,7 +10,12 @@ class AuthController extends require('./BaseController') {
 
     async login(req, res, next) {
         try {
-            res.json('login page');
+            const pool = req.body;
+            helperService.itContains(pool, ['login','password'], next);
+            if(!await hashService.compare(pool.password, (await super.getOne('users', {login: pool.login}, req, res, next, false)).dataValues.password)) {
+                return next(ApiErrors.badRequest('Данные введены не верно.'));
+            }
+
         } catch(error) {
             next(ApiErrors.badRequest('Ошибка при логировании пользователя'));
         }
