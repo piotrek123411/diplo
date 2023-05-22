@@ -1,4 +1,5 @@
 const models = require('../models/');
+const ApiErrors = require('../errors/ApiErrors');
 
 class BaseController {
     async getAll(modelName, where = {}, req, res, next, sendAnswer = true) {
@@ -10,7 +11,7 @@ class BaseController {
             else return result;
         } catch (error) {
             console.log(error);
-            next(ApiError.badRequest({
+            next(ApiErrors.badRequest({
                 message: 'Ошибка получения записей'
             }));
         }
@@ -25,7 +26,7 @@ class BaseController {
             else return result;
         } catch (error) {
             console.log(error)
-            next(ApiError.badRequest({
+            next(ApiErrors.badRequest({
                 message: 'Ошибка получения записи'
             }));
         }
@@ -42,7 +43,7 @@ class BaseController {
             else return result;
         } catch (error) {
             console.log(error);
-            next(ApiError.badRequest({
+            next(ApiErrors.badRequest({
                 message: 'Ошибка добавления записи'
             }));
         }
