@@ -12,10 +12,15 @@ class AuthController extends require('./BaseController') {
         try {
             const pool = req.body;
             helperService.itContains(pool, ['login','password'], next);
-            if(!await hashService.compare(pool.password, (await super.getOne('users', {login: pool.login}, req, res, next, false)).dataValues.password)) {
-                return next(ApiErrors.badRequest('Данные введены не верно.'));
-            }
+            const user = (await super.getOne('users', {login: pool.login}, req, res, next, false))?.dataValues;
+            if (!user) return next(ApiErrors.badRequest('Пользователя с таким логином не существует'));
 
+            if (!(await hashService.compare(pool.password, user.password)))
+                return next(ApiErrors.badRequest('Неверный пароль'));
+
+            res.status(200).json({
+                message: 'Успешная авторизация'
+            });
         } catch(error) {
             next(ApiErrors.badRequest('Ошибка при логировании пользователя'));
         }
