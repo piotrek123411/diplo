@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS "answers" (
     "value"             VARCHAR(999)     DEFAULT 'Ответ отсутствует',  
     "task_id"           UUID    REFERENCES "tasks"("id"),
     "user_id"           UUID    REFERENCES "users"("id"),
+    "mark"              VARCHAR(11) DEFAULT 'Не оценено.',
     "createdAt"         TIMESTAMP WITH TIME ZONE    DEFAULT CURRENT_TIMESTAMP,
     "updatedAt"         TIMESTAMP WITH TIME ZONE    DEFAULT CURRENT_TIMESTAMP
 );

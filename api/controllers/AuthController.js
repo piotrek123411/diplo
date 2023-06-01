@@ -2,6 +2,7 @@ const ApiErrors = require('../errors/ApiErrors');
 
 const hashService = require('../services/HashService');
 const helperService = require('../services/HelperService');
+const tokenService = require('../services/TokenService');
 
 class AuthController extends require('./BaseController') {
     constructor() {
@@ -19,9 +20,15 @@ class AuthController extends require('./BaseController') {
                 return next(ApiErrors.badRequest('Неверный пароль'));
 
             res.status(200).json({
-                message: 'Успешная авторизация'
+                message: 'Успешная авторизация',
+                token_type: 'Bearer',
+                token: tokenService.generate({
+                    id: user.id,
+                    login: user.login
+                })
             });
         } catch(error) {
+            console.log(error)
             next(ApiErrors.badRequest('Ошибка при логировании пользователя'));
         }
     }
@@ -37,7 +44,16 @@ class AuthController extends require('./BaseController') {
             pool.role_id = (await super.getOne('roles', { name: 'user' }, req, res, next, false)).dataValues.id;
             pool.password = await hashService.getHashString(pool.password);
 
-            const user = await super.add('users', pool, req, res, next, true);
+            const user = await super.add('users', pool, req, res, next, false);
+
+            res.status(200).json({
+                message: 'Успешная регистрация',
+                token_type: 'Bearer',
+                token: tokenService.generate({
+                    id: user.id,
+                    login: user.login
+                })
+            });
         } catch(error) {
             next(ApiErrors.badRequest(`Ошибка при регистрации пользователя \n${error}`));
         }
