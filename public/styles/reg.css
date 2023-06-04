@@ -1,0 +1,20 @@
+body {
+    padding-top: 5px;
+    margin: 12% auto;
+    width: 40%;
+    border: 1px solid black;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.row h1 {
+    font-size: 35px;
+}
+
+.btn {
+    padding: 0px 50px;
+}
+
+.card-action {
+    padding-top: 7px;
+}

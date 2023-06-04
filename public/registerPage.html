@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="/styles/login.css">       
+
+    <title>Registration page</title>
+</head>
+<body>
+    <div class="row">
+        <h1>Регистрация</h1>
+
+        <form class="col s12" action="/api/public/auth/registration" method="POST">
+          <div class="row">
+            <div class="input-field col s12">
+                <label for="login">Login</label>
+                <input id="login" name="login" type="text" class="validate">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" class="validate">
+            </div>
+          </div>
+          
+          <button class="reg btn waves-effect waves-light" type="submit" name="submit">Зарегистрироваться</button>
+        </form>
+        <div class="card-action">
+            Есть аккаунт?
+            <a href="http://localhost:5000/auth/login">Войти</a>
+          </div>
+      </div>
+
+    <script src="/src/index.js"></script>
+</body>
+</html>
