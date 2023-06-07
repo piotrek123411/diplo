@@ -9,9 +9,14 @@ class ClientController extends require('./BaseController') {
     }
 
     static absolutePath = path.join(__dirname, '..', '..', 'public');
+    static absolutePathPrivate = path.join(__dirname, '..', '..', 'private');
     static fileNames = {
         login: 'loginPage.html',
-        registration: 'registerPage.html'
+        registration: 'registerPage.html',
+        home: 'homePage.html',
+        answCheck: 'answerCheckPage.html',
+        taskAdd: 'taskAddPage.html',
+        answerAdd: 'answerAddPage'
     }
 
     getLoginPage(req, res, next) {
@@ -28,6 +33,38 @@ class ClientController extends require('./BaseController') {
             res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.registration));
         } catch(error) {
             return next(ApiErrors.badRequest('Ошибка при отправке страницы регистрации'));
+        }
+    }
+
+    getHomePage(req, res, next) {
+        try {
+            res.sendFile(path.join(ClientController.absolutePathPrivate, ClientController.fileNames.home));
+        } catch(error) {
+            return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
+        }
+    }
+
+    getAnswerCheckPage(req, res, next) {
+        try {
+            res.sendFile(path.join(ClientController.absolutePathPrivate, ClientController.fileNames.answCheck));
+        } catch(error) {
+            return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
+        }
+    }
+
+    getTaskAddPage(req, res, next) {
+        try {
+            res.sendFile(path.join(ClientController.absolutePathPrivate, ClientController.fileNames.taskAdd));
+        } catch(error) {
+            return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
+        }
+    }
+
+    getAnswerAddPage(req, res, next) {
+        try {
+            res.sendFile(path.join(ClientController.absolutePathPrivate, ClientController.fileNames.answerAdd));
+        } catch(error) {
+            return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
         }
     }
 }
