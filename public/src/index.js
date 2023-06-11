@@ -1,15 +1,16 @@
-// const regBtn = document.querySelector('.reg');
+const xhr = new XMLHttpRequest();
+xhr.open('GET', '/api/private/tasks/get');
+xhr.send();
+xhr.onload = () => {
+    const tasks = JSON.parse(xhr.response)?.tasks;
 
-// regBtn.onclick = () => {
-//     fetch('https://localhost:5000/api/public/auth/registration', {
-//         method: 'post',
-//         body: {
-//             login: 123,
-//             password: 123
-//         }
-//     }).then(
-//         response => response.text()
-//     ).then(
-//         html => console.log(html)
-//     );
-// };
+    tasks.forEach(el => {
+        const collection = document.querySelector('.collection');
+        const li = document.createElement('li');
+
+        li.classList.add('collection-item');
+        li.innerHTML = el.value;
+        collection.appendChild(li);
+    });
+    
+}

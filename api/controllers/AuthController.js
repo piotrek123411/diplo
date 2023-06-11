@@ -19,13 +19,17 @@ class AuthController extends require('./BaseController') {
             if (!(await hashService.compare(pool.password, user.password)))
                 return next(ApiErrors.badRequest('Неверный пароль'));
 
+            const token = tokenService.generate({
+                id: user.id,
+                login: user.login
+            })
+
+            res.cookie('Authorization', `Bearer ${token}`);
+
             res.status(200).json({
-                message: 'Успешная авторизация',
+                message: 'Успешная авторизация',    
                 token_type: 'Bearer',
-                token: tokenService.generate({
-                    id: user.id,
-                    login: user.login
-                })
+                token
             });
         } catch(error) {
             console.log(error)

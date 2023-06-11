@@ -38,7 +38,7 @@ class ClientController extends require('./BaseController') {
 
     getHomePage(req, res, next) {
         try {
-            res.sendFile(path.join(ClientController.absolutePathPrivate, ClientController.fileNames.home));
+            res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.home));
         } catch(error) {
             return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
         }
@@ -46,7 +46,7 @@ class ClientController extends require('./BaseController') {
 
     getAnswerCheckPage(req, res, next) {
         try {
-            res.sendFile(path.join(ClientController.absolutePathPrivate, ClientController.fileNames.answCheck));
+            res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.answCheck));
         } catch(error) {
             return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
         }
@@ -54,7 +54,7 @@ class ClientController extends require('./BaseController') {
 
     getTaskAddPage(req, res, next) {
         try {
-            res.sendFile(path.join(ClientController.absolutePathPrivate, ClientController.fileNames.taskAdd));
+            res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.taskAdd));
         } catch(error) {
             return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
         }
@@ -62,7 +62,7 @@ class ClientController extends require('./BaseController') {
 
     getAnswerAddPage(req, res, next) {
         try {
-            res.sendFile(path.join(ClientController.absolutePathPrivate, ClientController.fileNames.answerAdd));
+            res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.answerAdd));
         } catch(error) {
             return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
         }

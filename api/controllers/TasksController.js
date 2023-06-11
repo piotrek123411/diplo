@@ -6,6 +6,24 @@ class TasksController extends require('./BaseController') {
         super();
     }
 
+    async get(req, res, next) {
+        try {
+            const id = req.query?.id;
+            let tasks;
+            if (!id) tasks = await super.getAll('tasks', {}, req, res, next, false);
+            else tasks = await super.getAll('tasks', { id: id }, req, res, next, false);
+
+            res.status(200)
+                .json({
+                    message: 'Задачи успешно получены',
+                    tasks
+                })
+        } catch(error) {
+            console.log(error)
+            next(ApiErrors.badRequest('Ошибка при получении задач'));
+        }
+    }
+
     async create(req, res, next) {
         try {
             const pool = req.body;
