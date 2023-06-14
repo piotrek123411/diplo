@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="/styles/answerCheckPage.css">       
+    <link rel="stylesheet" href="/styles/taskAddPage.css">       
 
     <title>Добавление задачи</title>
 </head>
@@ -15,17 +15,22 @@
     <header>
         <nav>
             <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Практикум</a>
+            <a href="http://localhost:5000/home" class="brand-logo">Практикум</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="">Проверка ответов студентов</a></li>
-                <li><a href="">Добавление задачи</a></li>
-                <li><a href="">Выйти</a></li>
+                <li><a href="http://localhost:5000/answerCheck">Проверка ответов студентов</a></li>
+                <li><a href="http://localhost:5000/taskAdd">Добавление задачи</a></li>
+                <li><a href="http://localhost:5000/auth/loginPage">Выйти</a></li>
             </ul>
             </div>
         </nav>
     </header>
-    <div class="taskList">
-        <input class="taskValue">
+    <div class="content">
+        <div class="taskList">
+            <input class="taskValue">
+        </div>
+        <div class="submitButton">
+            <button>Добавить</button>
+        </div>
     </div>
 </body>
 </html>

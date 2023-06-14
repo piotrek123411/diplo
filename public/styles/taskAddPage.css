@@ -1,0 +1,11 @@
+.content{
+    justify-content: center;
+    text-align: center;
+}
+.taskList{
+    width: 70%;
+    align-self: center;
+}
+.submitButton {
+    color: aliceblue;
+}

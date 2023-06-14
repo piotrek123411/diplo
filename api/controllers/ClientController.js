@@ -16,7 +16,7 @@ class ClientController extends require('./BaseController') {
         home: 'homePage.html',
         answCheck: 'answerCheckPage.html',
         taskAdd: 'taskAddPage.html',
-        answerAdd: 'answerAddPage'
+        answerAdd: 'answerAddPage.html'
     }
 
     getLoginPage(req, res, next) {
