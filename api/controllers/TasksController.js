@@ -36,11 +36,12 @@ class TasksController extends require('./BaseController') {
                 return next(ApiErrors.badRequest('У вас недостаточно полномочий'));
 
             const task = await super.add('tasks', pool, req, res, next, false);
-            res.status(200)
-                .json({
-                    message: 'Задача успешно создана',
-                    id: task.dataValues.id
-                })
+            res.redirect("/home")
+            // res.status(200)
+            //     .json({
+            //         message: 'Задача успешно создана',
+            //         id: task.dataValues.id
+            //     })
         } catch(error) {
             console.log(error)
             next(ApiErrors.badRequest('Ошибка при создании задачи'));
@@ -59,11 +60,11 @@ class TasksController extends require('./BaseController') {
                 return next(ApiErrors.badRequest('У вас недостаточно полномочий'));
 
             const task = await super.delete('tasks', { id: pool.id }, req, res, next, false);
-            res.status(200)
-                .json({
-                    message: 'Задача успешно удалена',
-                    id: pool.id
-                })
+            // res.status(200)
+            //     .json({
+            //         message: 'Задача успешно удалена',
+            //         id: pool.id
+            //     })
         } catch(error) {
             console.log(error)
             next(ApiErrors.badRequest('Ошибка при удалении задачи'));

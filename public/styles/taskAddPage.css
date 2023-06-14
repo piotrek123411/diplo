@@ -1,11 +1,12 @@
-.content{
-    justify-content: center;
+form{
     text-align: center;
+    align-content: center;
+    margin: 12% auto;
+    width: 40%;
 }
-.taskList{
-    width: 70%;
-    align-self: center;
-}
-.submitButton {
-    color: aliceblue;
+
+.btn {
+    padding: 0px 50px;
+    width: 200px;
+    margin: auto;
 }

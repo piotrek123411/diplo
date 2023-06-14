@@ -25,12 +25,12 @@ class AuthController extends require('./BaseController') {
             })
 
             res.cookie('Authorization', `Bearer ${token}`);
-
-            res.status(200).json({
-                message: 'Успешная авторизация',    
-                token_type: 'Bearer',
-                token
-            });
+            res.redirect("/home")
+            // res.status(200).json({
+            //     message: 'Успешная авторизация',    
+            //     token_type: 'Bearer',
+            //     token
+            // });
         } catch(error) {
             console.log(error)
             next(ApiErrors.badRequest('Ошибка при логировании пользователя'));
@@ -50,14 +50,16 @@ class AuthController extends require('./BaseController') {
 
             const user = await super.add('users', pool, req, res, next, false);
 
-            res.status(200).json({
-                message: 'Успешная регистрация',
-                token_type: 'Bearer',
-                token: tokenService.generate({
-                    id: user.id,
-                    login: user.login
-                })
-            });
+            res.redirect("/home")
+
+            // res.status(200).json({
+            //     message: 'Успешная регистрация',
+            //     token_type: 'Bearer',
+            //     token: tokenService.generate({
+            //         id: user.id,
+            //         login: user.login
+            //     })
+            // });
         } catch(error) {
             next(ApiErrors.badRequest(`Ошибка при регистрации пользователя \n${error}`));
         }

@@ -16,7 +16,8 @@ class ClientController extends require('./BaseController') {
         home: 'homePage.html',
         answCheck: 'answerCheckPage.html',
         taskAdd: 'taskAddPage.html',
-        answerAdd: 'answerAddPage.html'
+        answerAdd: 'answerAddPage.html',
+        taskRemove: 'taskList.html'
     }
 
     getLoginPage(req, res, next) {
@@ -63,6 +64,14 @@ class ClientController extends require('./BaseController') {
     getAnswerAddPage(req, res, next) {
         try {
             res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.answerAdd));
+        } catch(error) {
+            return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
+        }
+    }
+
+    getTaskRemovePage(req, res, next) {
+        try {
+            res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.taskRemove));
         } catch(error) {
             return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
         }
