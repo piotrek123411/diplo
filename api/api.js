@@ -3,6 +3,7 @@ const app = require('express')();
 app.use(require('cors')());
 app.use(require('body-parser').urlencoded({ extended: false }))
 app.use(require('body-parser').json());
+app.use(require('body-parser').text({ type: 'text/html' }))
 app.use(require('cookie-parser')());
 app.use(require('express').static(require('path').join(__dirname, '..', 'public')));
 app.use('/api/public', require('../config/routes/publicRoutes'));

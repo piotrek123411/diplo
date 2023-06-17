@@ -6,10 +6,15 @@ xhr.onload = () => {
 
     tasks.forEach(el => {
         const collection = document.querySelector('.collection');
+        const link = document.createElement('a');
         const li = document.createElement('li');
 
+        console.log(`/task?id=${el.id}`)
+
         li.classList.add('collection-item');
-        li.innerHTML = el.value;
+        link.innerHTML = el.value;
+        link.href = `/task?id=${el.id}`;
+        li.appendChild(link);
         collection.appendChild(li);
     });
     
