@@ -1,4 +1,10 @@
-.taskList {
+.taskList{
+    text-align: center;
+    align-content: center;
+    margin: 12% auto;
+    width: 40%;
+}
+.btncontainer{
     text-align: center;
     align-content: center;
     margin: 12% auto;
