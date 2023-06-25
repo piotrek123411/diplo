@@ -7,5 +7,6 @@ router.get('/answerAdd',clientController.getAnswerAddPage);
 router.get('/answerCheck', clientController.getAnswerCheckPage);
 router.get('/taskList', clientController.getTaskRemovePage);
 router.get('/task', clientController.getTask);
+router.get('/answer', clientController.getMarkAddPage);
 
 module.exports = router;

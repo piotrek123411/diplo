@@ -7,7 +7,7 @@ module.exports = (DataTypes, sequelize) => {
              defaultValue: DataTypes.UUIDV4,
          },
          value: {
-             type: DataTypes.STRING(999),
+             type: DataTypes.STRING(2000),
              allowNull: false
          },
          task_id: {
@@ -19,7 +19,7 @@ module.exports = (DataTypes, sequelize) => {
             secondaryKey: true
          },
          mark: {
-            type: DataTypes.STRING(999),
+            type: DataTypes.STRING(11),
             defaultValue: 'Не оценено.'
          },
          createdAt: {

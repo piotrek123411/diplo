@@ -7,6 +7,24 @@ class AnswerController extends require('./BaseController') {
         super();
     }
 
+    async get(req, res, next) {
+        try {
+            const id = req.query?.id;
+            let answers;
+            if (!id) answers = await super.getAll('answers', {}, req, res, next, false);
+            else answers = await super.getAll('answers', { id: id }, req, res, next, false);
+
+            res.status(200)
+                .json({
+                    message: 'Ответы успешно получены',
+                    answers
+                })
+        } catch(error) {
+            console.log(error)
+            next(ApiErrors.badRequest('Ошибка при получении ответов'));
+        }
+    }
+
     async create(req, res, next) {
         try {
             const pool = req.body;
@@ -18,11 +36,7 @@ class AnswerController extends require('./BaseController') {
             if (!tasks) return next(ApiErrors.badRequest('Такой задачи не существует'));
 
             const answer = await super.add('answers', { user_id: user.id, ...pool }, req, res, next, false);
-            res.status(200)
-                .json({
-                    message: 'Ответ успешно дан',
-                    id: answer.dataValues.id
-                })
+            window.location.href='http://localhost:5000/home';
         } catch(error) {
             console.log(error)
             next(ApiErrors.badRequest('Ошибка при создании ответа'));
@@ -31,6 +45,7 @@ class AnswerController extends require('./BaseController') {
 
     async setMark(req, res, next) {
         try {
+            const id = req.query?.id;
             const pool = req.body;
             const user = res.user;
             helperService.itContains(pool, ['answer_id', 'mark'], next);
@@ -45,11 +60,7 @@ class AnswerController extends require('./BaseController') {
             if (!answer) return next(ApiErrors.badRequest('Такой задачи не существует'));
 
             answer = await super.update('answers', { mark: pool.mark }, { id: pool.answer_id }, req, res, next, false);
-            res.status(200)
-                .json({
-                    message: 'Оценка успешно выставлена',
-                    id: pool.answer_id
-                })
+            res.redirect('/home');
         } catch(error) {
             console.log(error)
             next(ApiErrors.badRequest('Ошибка при выставлении оценки'));

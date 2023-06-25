@@ -49,7 +49,7 @@ COMMENT ON COLUMN "tasks"."updatedAt" IS 'Время обновления зап
 -- Таблица ответа --
 CREATE TABLE IF NOT EXISTS "answers" (
     "id"                UUID    PRIMARY KEY     DEFAULT gen_random_uuid (),
-    "value"             VARCHAR(999)     DEFAULT 'Ответ отсутствует',  
+    "value"             VARCHAR(2000)     DEFAULT 'Ответ отсутствует',  
     "task_id"           UUID    REFERENCES "tasks"("id"),
     "user_id"           UUID    REFERENCES "users"("id"),
     "mark"              VARCHAR(11) DEFAULT 'Не оценено.',

@@ -36,7 +36,7 @@ class TasksController extends require('./BaseController') {
                 return next(ApiErrors.badRequest('У вас недостаточно полномочий'));
 
             const task = await super.add('tasks', pool, req, res, next, false);
-            res.redirect("/home")
+            window.location.href='http://localhost:5000/home';
         } catch(error) {
             console.log(error)
             next(ApiErrors.badRequest('Ошибка при создании задачи'));
@@ -54,9 +54,14 @@ class TasksController extends require('./BaseController') {
             if (role !== 'admin')
                 return next(ApiErrors.badRequest('У вас недостаточно полномочий'));
 
+            const ans = await super.getAll('answers', {task_id: pool.id}, req, res, next, false);
+            ans.forEach(element => {
+                const id = (element.dataValues.id);
+                super.delete('answers', { id: id}, req, res, next, false);
+            });
             const task = await super.delete('tasks', { id: pool.id }, req, res, next, false);
+            window.location.href='http://localhost:5000/home';
         } catch(error) {
-            console.log(error)
             next(ApiErrors.badRequest('Ошибка при удалении задачи'));
         }
     }

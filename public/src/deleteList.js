@@ -17,4 +17,5 @@ xhr.onload = () => {
         li.appendChild(link);
         collection.appendChild(li);
     });
+    
 }

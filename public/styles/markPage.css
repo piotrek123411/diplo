@@ -1,0 +1,21 @@
+.cont {
+    text-align: center;
+    align-content: center;
+    width: 60%;
+    margin: 10% auto;
+}
+#taskValue {
+    text-align: justify;
+}
+#answerValue {
+    text-align: justify;
+}
+.mark {
+    text-align: center;
+    align-content: center;
+    margin: 0px auto;
+    width: 20%;
+}
+.answerId{
+    display: none;
+}

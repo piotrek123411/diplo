@@ -8,5 +8,6 @@ router.get('/tasks/get', tasksController.get);
 
 router.post('/answer/create', answerController.create);
 router.post('/answer/set-mark', answerController.setMark);
+router.get('/answers/get', answerController.get)
 
 module.exports = router;

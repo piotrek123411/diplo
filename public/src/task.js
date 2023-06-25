@@ -26,3 +26,15 @@ btn.onclick = () => {
     
     }
 };
+
+const a = document.querySelector('.aaa');
+a.onclick = () => {{
+    const taskId = document.querySelector('.taskId');
+    const xhr3 = new XMLHttpRequest();
+    xhr3.open('POST', '/api/private/tasks/delete');
+    xhr3.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr3.send(JSON.stringify({
+        "id": taskId.value
+    }))
+
+}}
