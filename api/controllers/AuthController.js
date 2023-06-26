@@ -45,7 +45,7 @@ class AuthController extends require('./BaseController') {
 
             const user = await super.add('users', pool, req, res, next, false);
 
-            res.redirect("/home")
+            res.redirect("/auth/login")
 
         } catch(error) {
             next(ApiErrors.badRequest(`Ошибка при регистрации пользователя \n${error}`));

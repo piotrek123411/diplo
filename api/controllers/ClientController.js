@@ -2,6 +2,7 @@ const path = require('path');
 
 const ApiErrors = require('../errors/ApiErrors');
 const helperService = require('../services/HelperService');
+const cookieParser = require('cookie-parser');
 
 class ClientController extends require('./BaseController') {
     constructor() {
@@ -47,16 +48,31 @@ class ClientController extends require('./BaseController') {
         }
     }
 
-    getAnswerCheckPage(req, res, next) {
+    async getAnswerCheckPage(req, res, next) {
         try {
+            const user = res.user;
+            console.log(user)
+            let role = (await super.getOne('users', { login: user.login }, req, res, next, false))?.dataValues?.role_id;
+            role = (await super.getOne('roles', { id: role }, req, res, next, false))?.dataValues?.name;
+            if (role !== 'admin') 
+                return res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.home));
+
             res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.answCheck));
         } catch(error) {
+            console.log(error);
             return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
         }
     }
 
-    getTaskAddPage(req, res, next) {
+    async getTaskAddPage(req, res, next) {
         try {
+            const user = res.user;
+            console.log(user)
+            let role = (await super.getOne('users', { login: user.login }, req, res, next, false))?.dataValues?.role_id;
+            role = (await super.getOne('roles', { id: role }, req, res, next, false))?.dataValues?.name;
+            if (role !== 'admin') 
+                return res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.home));
+
             res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.taskAdd));
         } catch(error) {
             return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
