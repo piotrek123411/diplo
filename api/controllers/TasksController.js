@@ -36,7 +36,7 @@ class TasksController extends require('./BaseController') {
                 return next(ApiErrors.badRequest('У вас недостаточно полномочий'));
 
             const task = await super.add('tasks', pool, req, res, next, false);
-            window.location.href='http://localhost:5000/home';
+            res.redirect('/home');
         } catch(error) {
             console.log(error)
             next(ApiErrors.badRequest('Ошибка при создании задачи'));

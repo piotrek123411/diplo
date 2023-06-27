@@ -36,7 +36,7 @@ class AnswerController extends require('./BaseController') {
             if (!tasks) return next(ApiErrors.badRequest('Такой задачи не существует'));
 
             const answer = await super.add('answers', { user_id: user.id, ...pool }, req, res, next, false);
-            window.location.href='http://localhost:5000/home';
+            res.redirect('/home');
         } catch(error) {
             console.log(error)
             next(ApiErrors.badRequest('Ошибка при создании ответа'));

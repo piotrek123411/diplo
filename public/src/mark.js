@@ -5,6 +5,7 @@ xhr.send();
 xhr.onload = () => {
     const answerValue = document.querySelector('#answerValue');
     const answerId = document.querySelector('#answerId');
+    const student_id = JSON.parse(xhr.response).answers[0].user_id;
     const answer = JSON.parse(xhr.response).answers[0].value;
     const answer_Id = JSON.parse(xhr.response).answers[0].id;
     const task_id = JSON.parse(xhr.response).answers[0].task_id;
@@ -18,6 +19,17 @@ xhr.onload = () => {
         const task = JSON.parse(xhr2.response).tasks[0].value;
 
         taskValue.value = task; 
+    }
+
+    const xhr4 = new XMLHttpRequest();
+
+    xhr4.open('get', `api/private/user/getById?id=${student_id}`);
+    xhr4.send();
+    xhr4.onload = () => {
+        const studentName = document.querySelector('#studentName');
+        const name = JSON.parse(xhr4.response).login;
+        console.log(name);
+        studentName.value = name;
     }
     answerId.innerHTML = answer_Id;
     answerValue.value = answer;
@@ -35,5 +47,5 @@ btn.onclick = () => {
     }));
     xhr3.onload = () => {
     }
-    window.location.href='http://localhost:5000/home';
+    res.redirect('/home');
 };

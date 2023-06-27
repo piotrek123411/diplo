@@ -23,11 +23,20 @@ class ClientController extends require('./BaseController') {
         mark: 'markAddPage.html'
     }
 
+    async getUserById(req, res, next) {
+        try {
+            const id = req.query?.id;
+            const user = await super.getOne('users', {id: id},req, res, next, false);
+            res.json(user.dataValues);
+        } catch (error) {
+
+        }
+    }
+
     getLoginPage(req, res, next) {
         try {
             res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.login));
         } catch(error) {
-            console.log(error)
             return next(ApiErrors.badRequest('Ошибка при отправке страницы логирования'));
         }
     }
@@ -51,7 +60,6 @@ class ClientController extends require('./BaseController') {
     async getAnswerCheckPage(req, res, next) {
         try {
             const user = res.user;
-            console.log(user)
             let role = (await super.getOne('users', { login: user.login }, req, res, next, false))?.dataValues?.role_id;
             role = (await super.getOne('roles', { id: role }, req, res, next, false))?.dataValues?.name;
             if (role !== 'admin') 
@@ -67,7 +75,6 @@ class ClientController extends require('./BaseController') {
     async getTaskAddPage(req, res, next) {
         try {
             const user = res.user;
-            console.log(user)
             let role = (await super.getOne('users', { login: user.login }, req, res, next, false))?.dataValues?.role_id;
             role = (await super.getOne('roles', { id: role }, req, res, next, false))?.dataValues?.name;
             if (role !== 'admin') 
@@ -98,7 +105,6 @@ class ClientController extends require('./BaseController') {
     async getTask(req, res, next) {
         try {
             const pool = req.query;
-            console.log(pool)
             res.sendFile(path.join(ClientController.absolutePath, ClientController.fileNames.task))
         } catch(error) {
             return next(ApiErrors.badRequest('Ошибка при отправке страницы'));
